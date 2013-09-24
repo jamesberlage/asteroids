@@ -17,6 +17,25 @@
     return result;
   }
 
+  Game.prototype.stop = function() {
+    var that = this;
+    var stop = function () {
+      this.clearInterval(that.windowID);
+    }
+
+    stop();
+  }
+
+  Game.prototype.checkCollisions = function() {
+    var that = this;
+    this.asteroids.forEach(function(asteroid) {
+      if (asteroid.isCollidedWith(that.ship)) {
+        this.alert("Ya done son~");
+        that.stop();
+      }
+    })
+  }
+
   Game.prototype.draw = function() {
     var that = this;
 
@@ -38,11 +57,12 @@
   Game.prototype.step = function() {
     this.move();
     this.draw();
+    this.checkCollisions();
   }
 
   Game.prototype.start = function(wind) {
     var that = this;
-    wind.setInterval(function() {
+    this.windowID = wind.setInterval(function() {
       that.step();
     }, 50);
   }
