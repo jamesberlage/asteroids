@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <script src="asteroids.js"></script>
+    <script src="games.js"></script>
+  </head>
+
+  <body>
+    <script>
+      var canvas = document.createElement("canvas");
+      canvas.setAttribute("width", "500");
+      canvas.setAttribute("height", "500");
+
+      var body = document.getElementsByTagName("body")[0];
+      body.appendChild(canvas);
+
+      var game = new Games.Game(canvas.getContext("2d"), 500, 500);
+      console.log(game);
+      console.log(game.asteroids[0].pos);
+      game.start();
+    </script>
+  </body>
+</html>
