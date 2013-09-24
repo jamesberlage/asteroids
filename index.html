@@ -1,7 +1,9 @@
 <html>
   <head>
+    <script src="moving_object.js"></script>
     <script src="asteroids.js"></script>
-    <script src="games.js"></script>
+    <script src="ship.js"></script>
+    <script src="game.js"></script>
   </head>
 
   <body>
@@ -13,12 +15,8 @@
       var body = document.getElementsByTagName("body")[0];
       body.appendChild(canvas);
 
-      var game = new Games.Game(canvas.getContext("2d"), 500, 500);
+      var game = new Asteroids.Game(canvas.getContext("2d"), 500, 500);
       game.start(window);
-
-      // window.setInterval(function() {
-      //   game.step();
-      // }, 50)
     </script>
   </body>
 </html>
