@@ -18,9 +18,11 @@
     this.color = color;
   }
 
-  MovingObject.prototype.move = function() {
-    this.xCoord += this.xSpd;
-    this.yCoord += this.ySpd;
+  MovingObject.prototype.move = function(DIM_X, DIM_Y) {
+    this.xCoord = ((this.xCoord + this.xSpd + DIM_X + (3 * this.radius)) %
+                  (DIM_X + (2 * this.radius))) - this.radius;
+    this.yCoord = ((this.yCoord + this.ySpd + DIM_Y + (3 * this.radius)) %
+                  (DIM_Y + (2 * this.radius))) - this.radius;
   }
 
   MovingObject.prototype.draw = function(ctx) {
@@ -37,6 +39,14 @@
     );
 
     ctx.fill();
+  }
+
+  MovingObject.prototype.offCanvasX = function(DIM_X) {
+    return ((this.xCoord + this.radius) < 0 || (this.xCoord - this.radius) > DIM_X);
+  }
+
+  MovingObject.prototype.offCanvasY = function(DIM_Y) {
+    return ((this.yCoord + this.radius) < 0 || (this.yCoord - this.radius) > DIM_Y);
   }
 
   MovingObject.prototype.isCollidedWith = function(otherObject) {
