@@ -14,9 +14,11 @@
       body.appendChild(canvas);
 
       var game = new Games.Game(canvas.getContext("2d"), 500, 500);
-      console.log(game);
-      console.log(game.asteroids[0].pos);
-      game.start();
+      game.start(window);
+
+      // window.setInterval(function() {
+      //   game.step();
+      // }, 50)
     </script>
   </body>
 </html>

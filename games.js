@@ -21,30 +21,26 @@
 
     this.ctx.clearRect(0, 0, this.DIM_X, this.DIM_Y);
 
-    console.log(this);
     this.asteroids.forEach(function(asteroid) {
-      console.log(asteroid);
       asteroid.draw(that.ctx);
     });
-
-    this.ctx.fillRect(50,50, 100, 100);
   }
 
   Game.prototype.move = function() {
-
     this.asteroids.forEach(function(asteroid) {
       asteroid.move();
     });
   }
 
   Game.prototype.step = function() {
-
     this.move();
     this.draw();
   }
 
-  Game.prototype.start = function() {
-    console.log("We got here");
-    setInterval(this.step(), 100);
+  Game.prototype.start = function(wind) {
+    var that = this;
+    wind.setInterval(function() {
+      that.step();
+    }, 50);
   }
 })(this);

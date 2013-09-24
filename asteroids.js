@@ -67,7 +67,7 @@
 
   Asteroid.randomAsteroid = function(maxX, maxY) {
     var pos = [Math.random() * maxX, Math.random() * maxY];
-    var vel = [(Math.random() * 10) - 5, (Math.random() * 10) - 5];
+    var vel = [(Math.random() * 8) - 4, (Math.random() * 8) - 4];
     var radius = Math.random() * Asteroid.MAX_RADIUS;
 
     return new Asteroid(pos, vel, radius, "red");
