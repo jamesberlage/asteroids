@@ -18,7 +18,9 @@
   }
 
   Ship.prototype.draw = function(ctx) {
-    ctx.fillStyle = this.color;
+
+    ctx.strokeStyle = this.color;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
 
     var lT = (3 * Math.PI) / 4;
@@ -39,7 +41,8 @@
     ctx.lineTo(xRight, yRight);
     ctx.lineTo(xNose, yNose);
 
-    ctx.fill();
+
+    ctx.stroke();
   }
 
   Ship.prototype.power = function (impulse) {

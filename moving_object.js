@@ -26,7 +26,7 @@
   }
 
   MovingObject.prototype.draw = function(ctx) {
-    ctx.fillStyle = this.color;
+    ctx.strokeStyle = this.color;
     ctx.beginPath();
 
     ctx.arc(
@@ -38,7 +38,7 @@
       false
     );
 
-    ctx.fill();
+    ctx.stroke();
   }
 
   MovingObject.prototype.offCanvasX = function(DIM_X) {

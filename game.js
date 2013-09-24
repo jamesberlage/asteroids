@@ -6,7 +6,7 @@
     this.DIM_X = width;
     this.DIM_Y = height;
     this.asteroids = this.addAsteroids(20);
-    this.ship = root.Asteroids.Ship.initialize("blue");
+    this.ship = root.Asteroids.Ship.initialize("#FFFFFF");
   }
 
   Game.prototype.addAsteroids = function (numAsteroids) {
@@ -40,7 +40,8 @@
   Game.prototype.draw = function() {
     var that = this;
 
-    that.ctx.clearRect(0, 0, that.DIM_X, that.DIM_Y);
+    that.ctx.fillStyle="#000000";
+    that.ctx.fillRect(0, 0, that.DIM_X, that.DIM_Y);
 
     that.asteroids.forEach(function(asteroid) {
       asteroid.draw(that.ctx);

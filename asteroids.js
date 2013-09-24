@@ -19,7 +19,7 @@
     var vel = [(Math.random()) - 0.5, (Math.random()) - 0.5];
     var radius = (Math.random() + 1) * Asteroid.MAX_RADIUS;
 
-    return new Asteroid(pos, vel, radius, "red");
+    return new Asteroid(pos, vel, radius, "#FFFFFF");
   }
 
 })(this);
