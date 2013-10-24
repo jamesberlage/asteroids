@@ -49,8 +49,6 @@
     var x = Math.cos(this.direction);
     var y = (Math.sin(this.direction));
 
-    console.log([x, y]);
-
     this.xSpd += (x * impulse);
     this.ySpd += (y * impulse);
 
