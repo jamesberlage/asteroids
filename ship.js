@@ -26,7 +26,6 @@
     var lT = (3 * Math.PI) / 4;
     var rT = (5 * Math.PI) / 4;
 
-    // ctx.moveTo(this.xCoord, this.yCoord); // give the (x,y) coordinates
     var xNose = this.xCoord + ((this.radius + 10) * Math.cos(this.direction));
     var yNose = this.yCoord + ((this.radius + 10) * Math.sin(this.direction));
 
@@ -73,6 +72,11 @@
     } else {
       alert("invalid movement");
     }
+  }
+
+  Ship.prototype.fireBullet = function() {
+    return new Asteroids.Bullet([this.xCoord, this.yCoord],
+                                [Math.cos(this.direction) * 1.5, Math.sin(this.direction) * 1.5]);
   }
 
 })(this);

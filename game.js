@@ -6,6 +6,7 @@
     this.DIM_X = width;
     this.DIM_Y = height;
     this.asteroids = this.addAsteroids(20);
+    this.bullets = [];
     this.ship = root.Asteroids.Ship.initialize("#FFFFFF");
   }
 
@@ -40,20 +41,31 @@
   Game.prototype.draw = function() {
     var that = this;
 
-    that.ctx.fillStyle="#000000";
-    that.ctx.fillRect(0, 0, that.DIM_X, that.DIM_Y);
+    this.ctx.fillStyle="#000000";
+    this.ctx.fillRect(0, 0, that.DIM_X, that.DIM_Y);
 
-    that.asteroids.forEach(function(asteroid) {
+    this.asteroids.forEach(function(asteroid) {
       asteroid.draw(that.ctx);
     });
-    that.ship.draw(that.ctx);
+
+    this.bullets.forEach(function(bullet) {
+      bullet.draw(that.ctx);
+    });
+
+    this.ship.draw(this.ctx);
   }
 
   Game.prototype.move = function() {
     var that = this;
+
     this.asteroids.forEach(function(asteroid) {
       asteroid.move(that.DIM_X, that.DIM_Y);
     });
+
+    this.bullets.forEach(function(bullet) {
+      bullet.move(that.DIM_X, that.DIM_Y);
+    });
+
     this.ship.move(that.DIM_X, that.DIM_Y);
   }
 
@@ -74,6 +86,9 @@
       }
       if (key.isPressed("right")) {
         that.ship.torque("right");
+      }
+      if (key.isPressed("space")) {
+        that.bullets.push(that.ship.fireBullet());
       }
       that.step();
     }, 6.25);
