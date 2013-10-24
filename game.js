@@ -10,7 +10,7 @@
     this.ship = root.Asteroids.Ship.initialize("#FFFFFF");
   }
 
-  Game.prototype.addAsteroids = function (numAsteroids) {
+  Game.prototype.addAsteroids = function(numAsteroids) {
     var result = [];
 
     for (var i = 0; i < numAsteroids; i++) {
@@ -80,16 +80,20 @@
     this.windowID = wind.setInterval(function() {
       if (key.isPressed("up")) {
         that.ship.power(0.05);
-      }
+      } else if (key.isPressed("down")) {
+        that.ship.power(-0.05);
+      };
+
       if (key.isPressed("left")) {
         that.ship.torque("left");
-      }
-      if (key.isPressed("right")) {
+      } else if (key.isPressed("right")) {
         that.ship.torque("right");
-      }
+      };
+
       if (key.isPressed("space")) {
         that.bullets.push(that.ship.fireBullet());
-      }
+      };
+
       that.step();
     }, 6.25);
   }

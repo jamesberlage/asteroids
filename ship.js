@@ -2,12 +2,11 @@
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
   var Ship = Asteroids.Ship = function(color) {
-    this.xCoord = 250;
-    this.yCoord = 250;
-    this.xSpd = 0;
-    this.ySpd = 0;
-    this.direction = (3 * Math.PI) / 2;
-    this.radius = 10;
+    this.xPos = 250;
+    this.yPos = 250;
+    this.spd = 0;
+    this.dir = (3 * Math.PI) / 2;
+    this.rad = 10;
     this.color = color;
   }
 
@@ -23,60 +22,40 @@
     ctx.lineWidth = 1.5;
     ctx.beginPath();
 
-    var lT = (3 * Math.PI) / 4;
-    var rT = (5 * Math.PI) / 4;
+    var nose = this.findPoint(0);
+    var left = this.findPoint((3 * Math.PI) / 4);
+    var right = this.findPoint((5 * Math.PI) / 4);
 
-    var xNose = this.xCoord + ((this.radius + 10) * Math.cos(this.direction));
-    var yNose = this.yCoord + ((this.radius + 10) * Math.sin(this.direction));
-
-    var xLeft = this.xCoord + (this.radius * Math.cos((this.direction + lT) % (2 * Math.PI)));
-    var yLeft = this.yCoord + (this.radius * Math.sin((this.direction + lT) % (2 * Math.PI)));
-
-    var xRight = this.xCoord + (this.radius * Math.cos((this.direction + rT) % (2 * Math.PI)));
-    var yRight = this.yCoord + (this.radius * Math.sin((this.direction + rT) % (2 * Math.PI)));
-
-    ctx.moveTo(xNose, yNose);
-    ctx.lineTo(xLeft, yLeft);
-    ctx.lineTo(xRight, yRight);
-    ctx.lineTo(xNose, yNose);
-
+    ctx.moveTo(nose[0], nose[1]);
+    ctx.lineTo(left[0], left[1]);
+    ctx.lineTo(right[0], right[1]);
+    ctx.lineTo(nose[0], nose[1]);
 
     ctx.stroke();
   }
 
-  Ship.prototype.power = function (impulse) {
-    var x = Math.cos(this.direction);
-    var y = (Math.sin(this.direction));
+  Ship.prototype.power = function(impulse) {
+    this.spd += impulse;
 
-    this.xSpd += (x * impulse);
-    this.ySpd += (y * impulse);
-
-    if (this.xSpd > 1) {
-      this.xSpd = 1;
-    } else if (this.xSpd < -1) {
-      this.xSpd = -1;
-    }
-
-    if (this.ySpd > 1) {
-      this.ySpd = 1;
-    } else if (this.ySpd < -1) {
-      this.ySpd = -1;
-    }
+    if (this.spd > 1) {
+      this.spd = 1;
+    } else if (this.spd < 0) {
+      this.spd = 0;
+    };
   }
 
   Ship.prototype.torque = function(pivot) {
     if (pivot === "right") {
-      this.direction = (this.direction + 0.1) % (2 * Math.PI)
+      this.dir = (this.dir + 0.1) % (2 * Math.PI)
     } else if (pivot === "left") {
-      this.direction = (this.direction - 0.1 + (2 * Math.PI)) % (2 * Math.PI);
+      this.dir = (this.dir - 0.1 + (2 * Math.PI)) % (2 * Math.PI);
     } else {
       alert("invalid movement");
     }
   }
 
   Ship.prototype.fireBullet = function() {
-    return new Asteroids.Bullet([this.xCoord, this.yCoord],
-                                [Math.cos(this.direction) * 1.5, Math.sin(this.direction) * 1.5]);
+    return new Asteroids.Bullet([this.xPos, this.yPos], 1.5, this.dir);
   }
 
 })(this);
