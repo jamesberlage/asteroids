@@ -1,5 +1,6 @@
 <html>
   <head>
+    <script src="backbone-min.js"></script>
     <script src="underscore-min.js"></script>
     <script src="keymaster.min.js"></script>
     <script src="moving_object.js"></script>
@@ -18,7 +19,7 @@
       var body = document.getElementsByTagName("body")[0];
       body.appendChild(canvas);
 
-      var game = new Asteroids.Game(canvas.getContext("2d"), 500, 500);
+      var game = new AG.Game(canvas.getContext("2d"), 500, 500);
       game.start(window);
     </script>
   </body>
