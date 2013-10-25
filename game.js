@@ -1,8 +1,8 @@
 (function(root) {
   var AG = root.AG = (root.AG || {});
 
-  AG.Game = Backbone.model.extend({
-    intialize: function (ctx, width, height) {
+  AG.Game = Backbone.Model.extend({
+    intialize: function(ctx, width, height) {
       this.ctx = ctx;
       this.DIM_X = width;
       this.DIM_Y = height;
@@ -49,7 +49,7 @@
       });
 
       for (var i = 0; i < this.asteroids.length; i++) {
-        if (
+//        if (
       };
     },
 
