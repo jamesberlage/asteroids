@@ -1,12 +1,10 @@
 (function(root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  Function.prototype.inherits = function(SuperClass) {
-    function Surrogate() {}
-
+  Asteroids.inherits = function(Class, SuperClass) {
+    function Surrogate() {};
     Surrogate.prototype = SuperClass.prototype;
-
-    this.prototype = new Surrogate();
+    Class.prototype = new Surrogate();
   }
 
   MovingObject = Asteroids.MovingObject = function (pos, spd, dir, rad, color) {

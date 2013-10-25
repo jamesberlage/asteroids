@@ -6,9 +6,9 @@
     this.yPos = pos[1];
     this.spd = spd;
     this.dir = dir;
-    this.radius = 0.5;
+    this.rad = 1;
     this.color = "#FF0000";
   }
 
-  Bullet.inherits(Asteroids.MovingObject);
+  Asteroids.inherits(Bullet, Asteroids.MovingObject);
 })(this);

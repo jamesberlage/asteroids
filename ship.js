@@ -10,7 +10,7 @@
     this.color = color;
   }
 
-  Ship.inherits(Asteroids.MovingObject);
+  Asteroids.inherits(Ship, Asteroids.MovingObject);
 
   Ship.initialize = function(color) {
     return new Ship(color);

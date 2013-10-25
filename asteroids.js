@@ -1,7 +1,8 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Asteroid = Asteroids.Asteroid = function(pos, spd, dir, rad, color) {
+  var Asteroid = Asteroids.Asteroid = function(id, pos, spd, dir, rad, color) {
+    this.id = id;
     this.xPos = pos[0];
     this.yPos = pos[1];
     this.spd = spd;
@@ -12,7 +13,7 @@
 
   Asteroid.MIN_RADIUS = 10;
 
-  Asteroid.inherits(Asteroids.MovingObject);
+  Asteroids.inherits(Asteroid, Asteroids.MovingObject);
 
   Asteroid.randomAsteroid = function(maxX, maxY) {
     // a in [0, x_max)
