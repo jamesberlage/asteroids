@@ -1,8 +1,7 @@
 (function (root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Asteroid = Asteroids.Asteroid = function(id, pos, spd, dir, rad, color) {
-    this.id = id;
+  var Asteroid = Asteroids.Asteroid = function(pos, spd, dir, rad, color) {
     this.xPos = pos[0];
     this.yPos = pos[1];
     this.spd = spd;
@@ -30,6 +29,5 @@
     var rad = (Math.random() + 1) * Asteroid.MIN_RADIUS;
 
     return new Asteroid(pos, spd, dir, rad, "#FFFFFF");
-  }
-
+  };
 })(this);

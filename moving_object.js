@@ -14,6 +14,7 @@
     this.dir = dir;     // u
     this.rad = rad;     // r
     this.color = color;
+    this.toDelete = false;
   }
 
   MovingObject.prototype.findX = function() {
@@ -42,15 +43,15 @@
     var newYpos = this.findY() + this.yPos;
 
     if (newXpos > DIM_X) {
-      newXpos = 0;
+      newXpos = this.toDelete ? null : 0;
     } else if (newXpos < 0) {
-      newXpos = DIM_X;
+      newXpos = this.toDelete ? null : DIM_X;
     };
 
     if (newYpos > DIM_Y) {
-      newYpos = 0;
+      newYpos = this.toDelete ? null : 0;
     } else if (newYpos < 0) {
-      newYpos = DIM_Y;
+      newYpos = this.toDelete ? null : DIM_Y;
     };
 
     this.xPos = newXpos;

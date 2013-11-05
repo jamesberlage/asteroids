@@ -30,26 +30,21 @@
 
   Game.prototype.checkCollisions = function() {
     var that = this;
-    var chunks = [];
-    var exploded = [];
 
     _(this.asteroids).each(function(asteroid) {
       if (asteroid.isCollidedWith(that.ship)) {
         alert("Ya done son~");
         that.stop();
-      } else {
-        _(that.bullets).each(function(bullet) {
-          if (asteroid.isCollidedWith(that.bullet)) {
-            chunks.push.apply(chunks, asteroid.split());
-            exploded.push(asteroid);
-          };
-        });
       };
     });
+  }
 
-    for (var i = 0; i < this.asteroids.length; i++) {
-      if (
-    };
+  Game.prototype.purgeExtra = function() {
+    var that = this;
+
+    _(this.asteroids).each(function(asteroid) {
+      
+    });
   }
 
   Game.prototype.draw = function() {
@@ -87,6 +82,7 @@
     this.move();
     this.draw();
     this.checkCollisions();
+    this.purgeExtra();
   }
 
   Game.prototype.start = function(wind) {
