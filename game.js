@@ -39,12 +39,38 @@
     });
   }
 
-  Game.prototype.purgeExtra = function() {
+  Game.prototype.flagExtra = function() {
     var that = this;
 
-    _(this.asteroids).each(function(asteroid) {
-      
-    });
+    if (this.asteroids.length > 50) {
+      var aLen = this.asteroids.length % 50
+      for (var i = 0; i < aLen; i++) {
+        this.asteroids[i].toDelete = true;
+      };
+    };
+
+    if (this.bullets.length > 300) {
+      var bLen = this.bullets.length % 300
+      for (var j = 0; j < bLen; j++) {
+        this.bullets[j].toDelete = true;
+      };
+    };
+  }
+
+  Game.prototype.purgeExtra = function() {
+    var aLen = this.asteroids.length
+    for (var i = (aLen - 1); i >= 0; i--) {
+      if (this.asteroids[i].toDelete) {
+        this.asteroids.splice(i, 1);
+      };
+    };
+
+    var bLen = this.bullets.length
+    for (var j = (bLen - 1); j >= 0; j--) {
+      if (this.bullets[j].toDelete) {
+        this.bullets.splice(j, 1);
+      };
+    };
   }
 
   Game.prototype.draw = function() {
