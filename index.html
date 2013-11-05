@@ -1,6 +1,5 @@
 <html>
   <head>
-    <script src="underscore-min.js"></script>
     <script src="keymaster.min.js"></script>
     <script src="moving_object.js"></script>
     <script src="asteroids.js"></script>
@@ -19,7 +18,7 @@
       body.appendChild(canvas);
 
       var game = new Asteroids.Game(canvas.getContext("2d"), 500, 500);
-      game.start(window);
+      game.start(window, function() {});
     </script>
   </body>
 </html>
