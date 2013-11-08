@@ -1,24 +1,70 @@
 <html>
   <head>
+    <title>Asteroids!</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body>
+    <div id="content">
+      <div id="start-menu" class="menu-wrapper focusable">
+        <section class="menu">
+          <p>Welcome to asteroids!</p>
+          <menu>
+            <button id="start">Start</button>
+          </menu>
+        </section>
+      </div>
+      
+      <div id="replay-menu" class="menu-wrapper focusable" style="display: none;">
+        <section class="menu">
+          <p id="replay-message"></p>
+          <menu>
+            <button id="play-again">Play again?</button>
+          </menu>
+        </section>
+      </div>
+      
+      <div id="canvas-wrapper" class="focusable">
+        <canvas>
+
+        </canvas>
+      </div>
+    </div>
+
+    <script src="jquery-2.0.3.min.js" ></script>
     <script src="keymaster.min.js"></script>
     <script src="moving_object.js"></script>
     <script src="asteroids.js"></script>
     <script src="bullet.js"></script>
     <script src="ship.js"></script>
     <script src="game.js"></script>
-  </head>
 
-  <body>
-    <script>
-      var canvas = document.createElement("canvas");
-      canvas.setAttribute("width", "500");
-      canvas.setAttribute("height", "500");
+    <script type="text/javascript">
+      var startNewGame = function(game) {
+        game.start(window, function() {});
+      };
 
-      var body = document.getElementsByTagName("body")[0];
-      body.appendChild(canvas);
+      var startToCanvas = function(game) {
+        $("#start-menu").css("display", "none");
+        $("body").css("background", "rgba(255, 102, 0, 1)");
+        $("#canvas-wrapper").css("opacity", 1);
 
-      var game = new Asteroids.Game(canvas.getContext("2d"), 500, 500);
-      game.start(window, function() {});
+        startNewGame(game);
+      };
+
+      var replayToCanvas = function(game) {
+        $("#replay-menu").css("display", "none");
+      };
+
+      $(function() {
+        var $canvas = $("canvas");
+
+        var game = new Asteroids.Game($canvas[0].getContext("2d"), 800, 800);
+        game.draw();
+
+        $("#start").on("click", startToCanvas.bind(this, game));
+        $("#replay-message").on("click", replayToCanvas.bind(this, game));
+      });
     </script>
   </body>
 </html>
