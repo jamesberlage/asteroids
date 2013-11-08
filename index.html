@@ -14,16 +14,16 @@
           </menu>
         </section>
       </div>
-      
+
       <div id="replay-menu" class="menu-wrapper focusable" style="display: none;">
         <section class="menu">
-          <p>You participated!</p>
+          <p id="message"></p>
           <menu>
             <button id="play-again">Play again?</button>
           </menu>
         </section>
       </div>
-      
+
       <div id="canvas-wrapper" class="focusable">
         <div id="styling-div">
 
@@ -44,11 +44,20 @@
         $("body").css("background", "rgba(255, 102, 0, 0.5)");
         $("#canvas-wrapper").css("opacity", 0.25);
 
+        $("#message").html("You Participated!")
+        $("#replay-menu").css("display", "block");
+      };
+
+      var renderWin = function() {
+        $("body").css("background", "rgba(255, 102, 0, 0.5)");
+        $("#canvas-wrapper").css("opacity", 0.25);
+
+        $("#message").html("You Won!")
         $("#replay-menu").css("display", "block");
       };
 
       var startNewGame = function(game) {
-        game.start(window, renderPlayAgain);
+        game.start(window, renderPlayAgain, renderWin);
       };
 
       var startToCanvas = function(game) {

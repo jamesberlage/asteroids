@@ -131,15 +131,19 @@
     this.ship.move(this.DIM_X, this.DIM_Y);
   }
 
-  Game.prototype.step = function(callback) {
+  Game.prototype.step = function(lossCallback, winCallback) {
+    if (this.asteroids.length === 0) {
+      this.stop();
+      winCallback();
+    };
     this.move();
     this.draw();
     this.flagExtra();
     this.purgeExtra();
-    this.checkCollisions(callback);
+    this.checkCollisions(lossCallback);
   }
 
-  Game.prototype.start = function(wind, stopCallback) {
+  Game.prototype.start = function(wind, lossCallback, winCallback) {
     var that = this;
     this.windowID = wind.setInterval(function() {
       if (key.isPressed("up")) {
@@ -158,7 +162,7 @@
         that.bullets.push(that.ship.fireBullet());
       };
 
-      that.step(stopCallback);
+      that.step(lossCallback, winCallback);
     }, 6.25);
   }
 })(this);
