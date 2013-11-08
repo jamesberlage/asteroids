@@ -1,0 +1,95 @@
+<html>
+  <head>
+    <title>Asteroids!</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body>
+    <div id="content">
+      <div id="start-menu" class="menu-wrapper focusable">
+        <section class="menu">
+          <p>Welcome to asteroids!</p>
+          <menu>
+            <button id="start">Start</button>
+          </menu>
+        </section>
+      </div>
+
+      <div id="replay-menu" class="menu-wrapper focusable" style="display: none;">
+        <section class="menu">
+          <p id="message"></p>
+          <menu>
+            <button id="play-again">Play again?</button>
+          </menu>
+        </section>
+      </div>
+
+      <div id="canvas-wrapper" class="focusable">
+        <div id="styling-div">
+
+        </div>
+      </div>
+    </div>
+
+    <script src="jquery-2.0.3.min.js" ></script>
+    <script src="keymaster.min.js"></script>
+    <script src="moving_object.js"></script>
+    <script src="asteroids.js"></script>
+    <script src="bullet.js"></script>
+    <script src="ship.js"></script>
+    <script src="game.js"></script>
+
+    <script type="text/javascript">
+      var renderPlayAgain = function() {
+        $("body").css("background", "rgba(255, 102, 0, 0.5)");
+        $("#canvas-wrapper").css("opacity", 0.25);
+
+        $("#message").html("You Participated!")
+        $("#replay-menu").css("display", "block");
+      };
+
+      var renderWin = function() {
+        $("body").css("background", "rgba(255, 102, 0, 0.5)");
+        $("#canvas-wrapper").css("opacity", 0.25);
+
+        $("#message").html("You Won!")
+        $("#replay-menu").css("display", "block");
+      };
+
+      var startNewGame = function(game) {
+        game.start(window, renderPlayAgain, renderWin);
+      };
+
+      var startToCanvas = function(game) {
+        $("#start-menu").css("display", "none");
+        $("body").css("background", "rgba(255, 102, 0, 1)");
+        $("#canvas-wrapper").css("opacity", 1);
+
+        startNewGame(game);
+      };
+
+      var replayToCanvas = function(game) {
+        $("#replay-menu").css("display", "none");
+        $("body").css("background", "rgba(255, 102, 0, 1)");
+        $("#canvas-wrapper").css("opacity", 1);
+
+        game.reset();
+        startNewGame(game);
+      };
+
+      $(function() {
+        var canvas = document.createElement("canvas");
+        canvas.setAttribute("width", "800");
+        canvas.setAttribute("height", "800");
+
+        $("#styling-div").append(canvas);
+
+        var game = new Asteroids.Game(canvas.getContext("2d"), 800, 800);
+        game.draw();
+
+        $("#start").on("click", startToCanvas.bind(this, game));
+        $("#play-again").on("click", replayToCanvas.bind(this, game));
+      });
+    </script>
+  </body>
+</html>
