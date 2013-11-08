@@ -2,8 +2,8 @@
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
   var Ship = Asteroids.Ship = function(color) {
-    this.xPos = 250;
-    this.yPos = 250;
+    this.xPos = 400;
+    this.yPos = 400;
     this.spd = 0;
     this.dir = (3 * Math.PI) / 2;
     this.rad = 10;
