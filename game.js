@@ -1,10 +1,16 @@
 (function(root) {
   var Asteroids = root.Asteroids = (root.Asteroids || {});
 
-  var Game = Asteroids.Game = function (ctx, width, height) {
+  var Game = Asteroids.Game = function(ctx, width, height) {
     this.ctx = ctx;
     this.DIM_X = width;
     this.DIM_Y = height;
+    this.asteroids = this.addAsteroids(20);
+    this.bullets = [];
+    this.ship = root.Asteroids.Ship.initialize("#FFFFFF");
+  }
+
+  Game.prototype.reset = function() {
     this.asteroids = this.addAsteroids(20);
     this.bullets = [];
     this.ship = root.Asteroids.Ship.initialize("#FFFFFF");

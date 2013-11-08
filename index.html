@@ -17,7 +17,7 @@
       
       <div id="replay-menu" class="menu-wrapper focusable" style="display: none;">
         <section class="menu">
-          <p id="replay-message"></p>
+          <p>You participated!</p>
           <menu>
             <button id="play-again">Play again?</button>
           </menu>
@@ -25,9 +25,9 @@
       </div>
       
       <div id="canvas-wrapper" class="focusable">
-        <canvas>
+        <div id="styling-div">
 
-        </canvas>
+        </div>
       </div>
     </div>
 
@@ -40,8 +40,15 @@
     <script src="game.js"></script>
 
     <script type="text/javascript">
+      var renderPlayAgain = function() {
+        $("body").css("background", "rgba(255, 102, 0, 0.5)");
+        $("#canvas-wrapper").css("opacity", 0.25);
+
+        $("#replay-menu").css("display", "block");
+      };
+
       var startNewGame = function(game) {
-        game.start(window, function() {});
+        game.start(window, renderPlayAgain);
       };
 
       var startToCanvas = function(game) {
@@ -54,16 +61,25 @@
 
       var replayToCanvas = function(game) {
         $("#replay-menu").css("display", "none");
+        $("body").css("background", "rgba(255, 102, 0, 1)");
+        $("#canvas-wrapper").css("opacity", 1);
+
+        game.reset();
+        startNewGame(game);
       };
 
       $(function() {
-        var $canvas = $("canvas");
+        var canvas = document.createElement("canvas");
+        canvas.setAttribute("width", "800");
+        canvas.setAttribute("height", "800");
 
-        var game = new Asteroids.Game($canvas[0].getContext("2d"), 800, 800);
+        $("#styling-div").append(canvas);
+
+        var game = new Asteroids.Game(canvas.getContext("2d"), 800, 800);
         game.draw();
 
         $("#start").on("click", startToCanvas.bind(this, game));
-        $("#replay-message").on("click", replayToCanvas.bind(this, game));
+        $("#play-again").on("click", replayToCanvas.bind(this, game));
       });
     </script>
   </body>

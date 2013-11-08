@@ -29,6 +29,11 @@ body {
     z-index: 0;
 }
 
+#styling-div {
+	width: 800px;
+	margin: 40px auto;
+}
+
 #replay-menu {
 	z-index: 1;
 }
@@ -64,12 +69,4 @@ body {
 
 .menu button:hover {
 	background: #A468D5;
-}
-
-canvas {
-	border: 5px dashed black;
-	display: block;
-	margin: 40px auto;
-	width: 800px;
-	height: 800px;
 }
